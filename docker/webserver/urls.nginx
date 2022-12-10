@@ -1,0 +1,11 @@
+add_header Content-Security-Policy "default-src 'self'; child-src 'self' blob:";
+sub_filter '<link rel="stylesheet" href="./font-awesome.css">' '';
+try_files $uri
+ /article/2010/$uri
+ /article/2011/$uri
+ /article/2012/$uri
+ /article/2013/$uri
+ /article/2014/$uri
+ /article/2015/$uri
+ /book/$uri
+ /index.html =404;
