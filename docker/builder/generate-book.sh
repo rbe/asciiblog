@@ -19,7 +19,8 @@ do
         -a copycss \
         -a webfonts! \
         -a iconfont-remote! \
-        -a highlightjsdir=/opt/highlight \
+        -a highlightjsdir=/mnt/content/assets/highlight \
+        -r asciidoctor-diagram \
         --base-dir="/mnt/content/book/${g}" \
         -D "/mnt/publish/book" \
         "${g}.adoc"

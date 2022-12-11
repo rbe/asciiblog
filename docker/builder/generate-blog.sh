@@ -14,7 +14,17 @@ echo "Generating article groups: ${groups[@]}"
 for g in "${groups[@]}"
 do
     pushd "${g}" >/dev/null
-    generate-article-html.sh "${g}"
+    echo "Generating group ${g}: Asciidoc to HTML, $(pwd)"
+    find . -type f -name \*.adoc -print0 |
+      xargs -r -0 asciidoctor \
+        -a linkcss \
+        -a copycss \
+        -a webfonts! \
+        -a iconfont-remote! \
+        -a highlightjsdir=/mnt/content/assets/highlight \
+        -r asciidoctor-diagram \
+        --base-dir=/mnt/content/blog/article \
+        -D "/mnt/publish/article/${g}"
     popd >/dev/null
 done
 popd >/dev/null

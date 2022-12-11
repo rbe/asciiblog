@@ -18,7 +18,6 @@ echo "* RUNNING BUILDER"
 echo "*"
 docker run \
     --rm \
-    -it \
     -v "${BASEDIR}":/mnt \
     blog/builder:latest \
     generate-all.sh

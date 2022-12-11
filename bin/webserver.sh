@@ -12,6 +12,7 @@ echo "*"
 docker build \
     -t blog/webserver:latest \
     docker/webserver
+
 echo "*"
 echo "* RUNNING WEB SERVER"
 echo "*"

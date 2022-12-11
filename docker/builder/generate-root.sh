@@ -12,7 +12,8 @@ do
         -a copycss \
         -a webfonts! \
         -a iconfont-remote! \
-        --base-dir=/mnt/content/blog \
+        -r asciidoctor-diagram \
+        --base-dir=/mnt/content/root \
         -D /mnt/publish \
         "${adoc}"
 done

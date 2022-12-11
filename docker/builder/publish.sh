@@ -11,13 +11,9 @@ mkdir -p /mnt/publish
 
 # Copy assets/files
 echo -n "Copying assets... "
-#pushd /mnt/content/assets >/dev/null
-#find . \
-#    -type f |
-#    cpio -pd /mnt/publish/assets
-#popd >/dev/null
+#rsync --version
+#--iconv=UTF-8,UTF-8-mac \
 rsync \
-    -vhP --stats \
     -rl \
     --delete \
     /mnt/content/assets/ /mnt/publish/assets
@@ -31,5 +27,21 @@ then
     tar -C /mnt/publish/assets/highlight -xf /mnt/docker/builder/highlight.tar
 fi
 echo "done"
+
+# Optimize
+echo "Optimizing CSS... "
+mkdir -p /mnt/publish/assets/css
+:>/mnt/publish/assets/fontawesome/css/site.css
+for css in /fontawesome/css/all.min.css /fontawesome/css/v4-shims.min.css
+do
+    echo "${css}"
+    cat "/mnt/publish/assets${css}" >>/mnt/publish/assets/fontawesome/css/site.css
+    echo "" >>/mnt/publish/assets/css/site.css
+done
+echo "done"
+:>/mnt/publish/assets/css/site.css
+cat "/mnt/publish/asciidoctor.css" >>/mnt/publish/assets/css/site.css
+echo "" >>/mnt/publish/assets/css/site.css
+cat "/mnt/publish/assets/css/blog.css" >>/mnt/publish/assets/css/site.css
 
 exit 0
