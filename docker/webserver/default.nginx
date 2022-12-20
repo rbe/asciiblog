@@ -3,10 +3,11 @@ server {
     listen 8080;
     server_name localhost;
     access_log /proc/self/fd/1 main;
-    error_log /proc/self/fd/2 debug;
+    error_log /proc/self/fd/2 error;
     location / {
         root /usr/share/nginx/html/;
         index index.html;
+        rewrite ^/article/.+/(.*) /$1 permanent;
         include urls.nginx;
     }
 }
