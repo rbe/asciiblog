@@ -1,6 +1,6 @@
 FROM nginx:latest
 COPY default.nginx /etc/nginx/conf.d/default.conf
-COPY urls.nginx /etc/nginx/
+COPY asciiblog-*.nginx /etc/nginx/
 RUN apt-get upgrade \
     && apt-get update \
     && apt-get -y install --no-install-recommends \

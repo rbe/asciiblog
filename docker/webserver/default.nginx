@@ -7,7 +7,6 @@ server {
     location / {
         root /usr/share/nginx/html/;
         index index.html;
-        rewrite ^/article/.+/(.*) /$1 permanent;
-        include urls.nginx;
+        include asciiblog-*.nginx;
     }
 }
