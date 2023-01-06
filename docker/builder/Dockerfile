@@ -15,7 +15,8 @@ RUN apt-get -y install \
     && gem install asciidoctor-diagram \
     && gem install barby \
     && gem install rqrcode \
-    && npm install --global state-machine-cat
+    && npm install --global state-machine-cat \
+    && npm install --global uglify-js css-minify
 
 FROM tools
 COPY *.sh /usr/local/bin/

@@ -28,20 +28,27 @@ then
 fi
 echo "done"
 
-# Optimize
-echo "Optimizing CSS... "
+# CSS
+echo -n "Optimizing FontAwesome CSS... "
 mkdir -p /mnt/publish/assets/css
 :>/mnt/publish/assets/fontawesome/css/site.css
-for css in /fontawesome/css/all.min.css /fontawesome/css/v4-shims.min.css
+for css in /fontawesome/css/fontawesome.min.css /fontawesome/css/solid.min.css /fontawesome/css/brands.min.css /fontawesome/css/v4-shims.min.css
 do
-    echo "${css}"
-    cat "/mnt/publish/assets${css}" >>/mnt/publish/assets/fontawesome/css/site.css
-    echo "" >>/mnt/publish/assets/css/site.css
+    echo -n "${css} "
+    {
+        cat "/mnt/publish/assets${css}";
+        echo ""
+    } >>/mnt/publish/assets/fontawesome/css/site.css
 done
 echo "done"
-:>/mnt/publish/assets/css/site.css
-cat "/mnt/publish/asciidoctor.css" >>/mnt/publish/assets/css/site.css
-echo "" >>/mnt/publish/assets/css/site.css
-cat "/mnt/publish/assets/css/blog.css" >>/mnt/publish/assets/css/site.css
+# CSS
+echo "Minifying CSS... "
+css-minify -f /publish/assets/css/blog.css -o /publish/assets/css
+echo "done"
+
+# JavaScript
+echo "UglifyingJ JavaScript... "
+uglifyjs --compress --mangle --mangle-props -- /mnt/publish/assets/js/onload.js >/mnt/publish/assets/js/onload.min.js
+echo "done"
 
 exit 0
