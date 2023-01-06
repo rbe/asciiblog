@@ -16,10 +16,12 @@ docker build \
 echo "*"
 echo "* RUNNING WEB SERVER"
 echo "*"
+cp "${BASEDIR}"/docker/webserver/asciiblog-*.nginx "${BASEDIR}/publish"
 docker run \
     --rm \
     -v "${BASEDIR}/publish":/usr/share/nginx/html \
-    -p "8080:80" \
+    -v "${BASEDIR}/publish":/srv/http/sites/bensmann.com/www \
+    -p "8080:8080" \
     blog/webserver:latest
 
 exit 0

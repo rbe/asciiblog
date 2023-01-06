@@ -1,9 +1,8 @@
 server {
-    listen 80 default_server;
-    listen 8080;
+    listen 8080 default_server;
     server_name localhost;
     access_log /proc/self/fd/1 main;
-    error_log /proc/self/fd/2 error;
+    error_log /proc/self/fd/2 notice;
     location / {
         root /usr/share/nginx/html/;
         index index.html;
