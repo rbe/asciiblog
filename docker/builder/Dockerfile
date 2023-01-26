@@ -6,7 +6,7 @@ RUN apt-get update \
 
 FROM base AS tools
 RUN apt-get -y install \
-        asciidoctor ruby-asciidoctor-plantuml ruby-asciidoctor-pdf \
+        asciidoctor ruby-asciidoctor-kroki ruby-asciidoctor-plantuml ruby-asciidoctor-pdf \
         plantuml \
         imagemagick \
         python3-blockdiag \
