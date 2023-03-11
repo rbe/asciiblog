@@ -2,3 +2,5 @@
 /content/
 /publish/
 *.tar
+/.idea/
+*.iml
