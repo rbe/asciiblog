@@ -1,0 +1,10 @@
+gzip on;
+gzip_types text/plain
+        font/woff2
+        text/css
+        text/javascript application/javascript application/x-javascript
+        application/json
+        text/xml application/xml application/xhtml+xml application/xml+rss;
+gzip_proxied no-cache no-store no_last_modified private expired auth;
+gzip_min_length 256;
+gzip_comp_level 6;

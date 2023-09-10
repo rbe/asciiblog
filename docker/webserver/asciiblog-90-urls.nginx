@@ -1,0 +1,50 @@
+server_name_in_redirect on;
+port_in_redirect on;
+
+rewrite_log on;
+rewrite ^/article/.+/(.*).html$ $scheme://$host:$server_port/$1.html permanent;
+rewrite ^/(.+)/$ $scheme://$host:$server_port/$1.html permanent;
+rewrite ^/((?!.+[.](xml|html|png|svg)$).+)$ $scheme://$host:$server_port/$1.html permanent;
+
+location = /index.html {
+    include /srv/http/sites/bensmann.com/www/asciiblog-10-security.nginx;
+    add_header Clear-Site-Data "*";
+}
+location /assets/ {
+    include /srv/http/sites/bensmann.com/www/asciiblog-10-security.nginx;
+    valid_referers server_names;
+    location ~* .(eot|otf|ttf|woff|woff2|ico)$ {
+        include /srv/http/sites/bensmann.com/www/asciiblog-10-security.nginx;
+        if ($invalid_referer) {
+            return 403;
+        }
+        expires modified +1y;
+        access_log off;
+    }
+    location ~* .(svg|png|jpg|jpeg|gif|png)$ {
+        include /srv/http/sites/bensmann.com/www/asciiblog-10-security.nginx;
+        if ($invalid_referer) {
+            return 403;
+        }
+        expires modified +1w;
+        access_log off;
+    }
+    location ~* .(css|js)$ {
+        include /srv/http/sites/bensmann.com/www/asciiblog-10-security.nginx;
+        if ($invalid_referer) {
+            return 403;
+        }
+        expires modified +1w;
+        access_log off;
+    }
+}
+location /favicon.ico {
+    include /srv/http/sites/bensmann.com/www/asciiblog-10-security.nginx;
+    expires modified +1y;
+    access_log off;
+}
+
+try_files $uri $uri/
+  /blog$uri
+  /book$uri
+  =404;

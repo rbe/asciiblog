@@ -1,0 +1,4 @@
+location /ijos-stellenportal {
+    auth_basic "IJOS Stellenportal";
+    auth_basic_user_file /home/rbe/bensmann.com.htpasswd;
+}
